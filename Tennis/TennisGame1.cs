@@ -2,10 +2,12 @@ namespace Tennis
 {
     public class TennisGame1 : ITennisGame
     {
-        private int matchScorePlayer1 = 0;
-        private int matchScorePlayer2 = 0;
+        private int scorePlayer1 = 0;
+        private int scorePlayer2 = 0;
         private string player1Name;
         private string player2Name;
+
+        private const int GAME_WINNING_POINT = 4;
 
         public TennisGame1(string player1Name, string player2Name)
         {
@@ -16,18 +18,18 @@ namespace Tennis
         public void WonPoint(string playerName)
         {
             if (playerName == "player1")
-                matchScorePlayer1 += 1;
+                scorePlayer1++;
             else
-                matchScorePlayer2 += 1;
+                scorePlayer2++;
         }
 
         public string GetScore()
         {
             string score = "";
             var tempScore = 0;
-            if (matchScorePlayer1 == matchScorePlayer2)
+            if (scorePlayer1 == scorePlayer2)
             {
-                switch (matchScorePlayer1)
+                switch (scorePlayer1)
                 {
                     case 0:
                         score = "Love-All";
@@ -44,20 +46,20 @@ namespace Tennis
 
                 }
             }
-            else if (matchScorePlayer1 >= 4 || matchScorePlayer2 >= 4)
+            else if (scorePlayer1 >= GAME_WINNING_POINT || scorePlayer2 >= GAME_WINNING_POINT)
             {
-                var minusResult = matchScorePlayer1 - matchScorePlayer2;
-                if (minusResult == 1) score = "Advantage player1";
-                else if (minusResult == -1) score = "Advantage player2";
-                else if (minusResult >= 2) score = "Win for player1";
+                var scoreDifference = scorePlayer1 - scorePlayer2;
+                if (scoreDifference == 1) score = "Advantage player1";
+                else if (scoreDifference == -1) score = "Advantage player2";
+                else if (scoreDifference >= 2) score = "Win for player1";
                 else score = "Win for player2";
             }
             else
             {
                 for (var i = 1; i < 3; i++)
                 {
-                    if (i == 1) tempScore = matchScorePlayer1;
-                    else { score += "-"; tempScore = matchScorePlayer2; }
+                    if (i == 1) tempScore = scorePlayer1;
+                    else { score += "-"; tempScore = scorePlayer2; }
                     switch (tempScore)
                     {
                         case 0:
