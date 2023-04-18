@@ -74,7 +74,7 @@ namespace Tennis.TennisGame2
 
         private string GetAdvantageOrWinScoreAsString()
         {
-            if (DoesOneOfThePlayersLeadByOnePoint())
+            if (IsOnePlayerLeadingByOnePoint())
             {
                 return "Advantage " + (IsPlayer1Leading() ? _player1.Name : _player2.Name);
             }
@@ -93,7 +93,7 @@ namespace Tennis.TennisGame2
             return scoreDifference > 0;
         }
 
-        private bool DoesOneOfThePlayersLeadByOnePoint()
+        private bool IsOnePlayerLeadingByOnePoint()
         {
             var scoreDifference = GetScoreDifference();
             return Math.Abs(scoreDifference) == 1;
